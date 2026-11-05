@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+    SGC ERP - Delivery Receipt
+</title>
+
+<link
+    rel="stylesheet"
+    href="assets/css/style.css"
+>
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+
+    <div class="sidebar">
+
+        <h2>
+            SGC ERP
+        </h2>
+
+        <ul>
+
+            <li onclick="goToPage('dashboard.html')">
+                📊 Dashboard
+            </li>
+
+            <li onclick="goToPage('gr-entry.html')">
+                🚛 G.R Entry
+            </li>
+
+            <li
+                class="active-menu"
+                onclick="goToPage('delivery-receipt.html')"
+            >
+                🧾 Delivery Receipt
+            </li>
+
+            <li onclick="goToPage('tracking.html')">
+                📍 Tracking
+            </li>
+
+            <li onclick="goToPage('cash-book.html')">
+                💰 Daily Cash Book
+            </li>
+
+            <li onclick="goToPage('transport-master.html')">
+                🚚 Transport Master
+            </li>
+
+            <li onclick="goToPage('challan-report.html')">
+                📄 Challan Reports
+            </li>
+
+            <li onclick="goToPage('transport-ledger.html')">
+                📘 Transport Ledger
+            </li>
+
+            <li onclick="goToPage('reports.html')">
+                📈 Reports
+            </li>
+
+            <li onclick="goToPage('backup.html')">
+                💾 Backup
+            </li>
+
+        </ul>
+
+        <!-- USER -->
+
+        <div class="sidebar-footer">
+
+            <p id="loggedUser">
+
+                User : -
+
+            </p>
+
+            <br>
+
+            <button
+                type="button"
+                class="delete-btn"
+                onclick="logout()"
+                style="width:100%;"
+            >
+                Logout
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- =====================================
+         MAIN
+    ====================================== -->
+
+    <div class="main">
+
+        <!-- =====================================
+             TOPBAR
+        ====================================== -->
+
+        <div class="topbar">
+
+            <div>
+
+                <h1>
+                    Delivery Receipt System
+                </h1>
+
+                <p id="currentFY">
+
+                    Financial Year :
+                    2025-26
+
+                </p>
+
+            </div>
+
+            <div class="action-buttons">
+
+                <button
+                    type="button"
+                    class="dark-btn"
+                    onclick="toggleDarkMode()"
+                >
+                    🌙 Dark Mode
+                </button>
+
+                <button
+                    type="button"
+                    class="save-btn"
+                    onclick="markOutForDelivery()"
+                >
+                    Out For Delivery
+                </button>
+
+                <button
+                    type="button"
+                    class="edit-btn"
+                    onclick="markDelivered()"
+                >
+                    Mark Delivered
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- =====================================
+             FORM SECTION
+        ====================================== -->
+
+        <div class="form-box">
+
+            <div class="form-grid">
+
+                <!-- RECEIPT -->
+
+                <div class="info-box">
+
+                    <label>
+                        Receipt Number
+                    </label>
+
+                    <input
+                        type="text"
+                        id="receiptNo"
+                        readonly
+                    >
+
+                </div>
+
+                <!-- SEARCH GR -->
+
+                <div class="info-box">
+
+                    <label>
+                        Search G.R Number
+                    </label>
+
+                    <input
+                        type="text"
+                        id="grSearch"
+                        placeholder="Search G.R Number"
+                        onkeyup="searchGRDropdown()"
+                    >
+
+                </div>
+
+                <!-- GR SELECT -->
+
+                <div class="info-box">
+
+                    <label>
+                        Select G.R
+                    </label>
+
+                    <select id="grSelect">
+
+                        <option value="">
+                            Select G.R Number
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <!-- PARTY -->
+
+                <div class="info-box">
+
+                    <label>
+                        Sender Party
+                    </label>
+
+                    <input
+                        type="text"
+                        id="senderParty"
+                        readonly
+                    >
+
+                </div>
+
+                <div class="info-box">
+
+                    <label>
+                        Receiver Party
+                    </label>
+
+                    <input
+                        type="text"
+                        id="receiverParty"
+                        readonly
+                    >
+
+                </div>
+
+                <!-- ROUTE -->
+
+                <div class="info-box">
+
+                    <label>
+                        From City
+                    </label>
+
+                    <input
+                        type="text"
+                        id="fromCity"
+                        readonly
+                    >
+
+                </div>
+
+                <div class="info-box">
+
+                    <label>
+                        To City
+                    </label>
+
+                    <input
+                        type="text"
+                        id="toCity"
+                        readonly
+                    >
+
+                </div>
+
+                <!-- GOODS -->
+
+                <div class="info-box">
+
+                    <label>
+                        Pvt Marka
+                    </label>
+
+                    <input
+                        type="text"
+                        id="pvtMarka"
+                        readonly
+                    >
+
+                </div>
+
+                <div class="info-box">
+
+                    <label>
+                        Material Detail
+                    </label>
+
+                    <input
+                        type="text"
+                        id="materialDetail"
+                        readonly
+                    >
+
+                </div>
+
+                <!-- FREIGHT -->
+
+                <div class="info-box">
+
+                    <label>
+                        Freight Status
+                    </label>
+
+                    <input
+                        type="text"
+                        id="freightStatus"
+                        readonly
+                    >
+
+                </div>
+
+                <div class="info-box">
+
+                    <label>
+                        Freight Amount
+                    </label>
+
+                    <input
+                        type="number"
+                        id="freightAmount"
+                        readonly
+                    >
+
+                </div>
+
+                <!-- CHARGES -->
+
+                <div class="info-box">
+
+                    <label>
+                        Delivery Charges
+                    </label>
+
+                    <input
+                        type="number"
+                        id="deliveryCharge"
+                        value="0"
+                        oninput="calculateReceiptTotal()"
+                    >
+
+                </div>
+
+                <div class="info-box">
+
+                    <label>
+                        Labour Charges
+                    </label>
+
+                    <input
+                        type="number"
+                        id="labour"
+                        value="0"
+                        oninput="calculateReceiptTotal()"
+                    >
+
+                </div>
+
+                <div class="info-box">
+
+                    <label>
+                        Other Charges
+                    </label>
+
+                    <input
+                        type="number"
+                        id="other"
+                        value="0"
+                        oninput="calculateReceiptTotal()"
+                    >
+
+                </div>
+
+                <!-- DUMRAGE -->
+
+                <div class="info-box">
+
+                    <label>
+                        Dumrage Charges
+                    </label>
+
+                    <input
+                        type="number"
+                        id="dumrageCharges"
+                        value="0"
+                        oninput="calculateReceiptTotal()"
+                    >
+
+                </div>
+
+                <!-- TOTAL -->
+
+                <div class="info-box">
+
+                    <label>
+                        Total Amount
+                    </label>
+
+                    <input
+                        type="number"
+                        id="totalAmount"
+                        readonly
+                    >
+
+                </div>
+
+                <!-- PAYMENT -->
+
+                <div class="info-box">
+
+                    <label>
+                        Payment Mode
+                    </label>
+
+                    <select id="paymentMode">
+
+                        <option value="Cash">
+                            Cash
+                        </option>
+
+                        <option value="BharatPe">
+                            BharatPe
+                        </option>
+
+                        <option value="Account Transfer">
+                            Account Transfer
+                        </option>
+
+                        <option value="Add To Bill">
+                            Add To Bill
+                        </option>
+
+                        <option value="Pending">
+                            Pending
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="info-box">
+
+                    <label>
+                        Amount Received
+                    </label>
+
+                    <input
+                        type="number"
+                        id="amountReceived"
+                        value="0"
+                        oninput="calculateReceiptTotal()"
+                    >
+
+                </div>
+
+                <div class="info-box">
+
+                    <label>
+                        Balance Amount
+                    </label>
+
+                    <input
+                        type="number"
+                        id="balanceAmount"
+                        readonly
+                    >
+
+                </div>
+
+                <div class="info-box">
+
+                    <label>
+                        Payment Status
+                    </label>
+
+                    <select id="paymentStatus">
+
+                        <option value="Paid">
+                            Paid
+                        </option>
+
+                        <option value="Partial">
+                            Partial
+                        </option>
+
+                        <option value="Pending">
+                            Pending
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <!-- RECEIVER -->
+
+                <div class="info-box">
+
+                    <label>
+                        Received By *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="receivedBy"
+                        placeholder="Receiver Name"
+                    >
+
+                </div>
+
+                <div class="info-box">
+
+                    <label>
+                        Receiver Mobile *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="receiverMobile"
+                        placeholder="Mobile Number"
+                    >
+
+                </div>
+
+                <div class="info-box">
+
+                    <label>
+                        Delivery Vehicle Number
+                    </label>
+
+                    <input
+                        type="text"
+                        id="deliveryVehicle"
+                        placeholder="Vehicle Number"
+                        oninput="this.value=this.value.toUpperCase()"
+                    >
+
+                </div>
+
+            </div>
+
+            <!-- ACTION BUTTONS -->
+
+            <div class="action-buttons">
+
+                <button
+                    type="button"
+                    class="save-btn"
+                    onclick="generateReceipt()"
+                >
+                    Generate Receipt
+                </button>
+
+                <button
+                    type="button"
+                    class="backup-btn"
+                    onclick="clearReceiptForm()"
+                >
+                    Reset Form
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- =====================================
+             RECEIPT TABLE
+        ====================================== -->
+
+        <div class="table-container">
+
+            <h2>
+                Generated Receipts
+            </h2>
+
+            <br>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Receipt</th>
+
+                        <th>G.R No</th>
+
+                        <th>Party</th>
+
+                        <th>Payment</th>
+
+                        <th>Received</th>
+
+                        <th>Balance</th>
+
+                        <th>Status</th>
+
+                        <th>Date</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="receiptTable">
+
+                    <tr>
+
+                        <td colspan="9">
+
+                            No Receipts Found
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =====================================
+     SCRIPTS
+===================================== -->
+
+<script src="database/indexeddb.js"></script>
+
+<script src="assets/js/app.js"></script>
+
+<script src="assets/js/delivery.js"></script>
+
+<script src="assets/js/auth.js"></script>
+
+<!-- =====================================
+     USER INFO
+===================================== -->
+
+<script>
+
+document.getElementById(
+    "currentFY"
+).innerText =
+
+"Financial Year : " +
+
+(
+
+    localStorage.getItem(
+        "financialYear"
+    )
+
+    ||
+
+    "-"
+
+);
+
+document.getElementById(
+    "loggedUser"
+).innerText =
+
+"User : " +
+
+(
+
+    localStorage.getItem(
+        "fullName"
+    )
+
+    ||
+
+    "-"
+
+);
+
+</script>
+
+</body>
+
+</html>

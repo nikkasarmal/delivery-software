@@ -1,0 +1,205 @@
+/* =========================================
+   DASHBOARD CARDS
+========================================= */
+
+.card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:28px;
+
+    border-radius:18px;
+
+    color:white;
+
+    backdrop-filter:blur(8px);
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,0.08);
+
+    transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    opacity 0.3s ease;
+
+}
+
+/* =========================================
+   CARD HOVER EFFECT
+========================================= */
+
+.card:hover{
+
+    transform:
+    translateY(-6px);
+
+    box-shadow:
+    0 20px 40px rgba(0,0,0,0.15);
+
+}
+
+/* =========================================
+   CARD TOP GLOW
+========================================= */
+
+.card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:4px;
+
+    background:
+    rgba(255,255,255,0.45);
+
+}
+
+/* =========================================
+   CARD OVERLAY
+========================================= */
+
+.card::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:-50px;
+    right:-50px;
+
+    width:140px;
+    height:140px;
+
+    background:
+    rgba(255,255,255,0.08);
+
+    border-radius:50%;
+
+}
+
+/* =========================================
+   CARD TEXT
+========================================= */
+
+.card h3,
+.card p{
+
+    position:relative;
+
+    z-index:2;
+
+    font-size:18px;
+
+    font-weight:500;
+
+    margin-bottom:12px;
+
+    opacity:0.95;
+
+}
+
+.card h1,
+.card h2{
+
+    position:relative;
+
+    z-index:2;
+
+    font-size:40px;
+
+    font-weight:700;
+
+    letter-spacing:0.5px;
+
+    line-height:1.2;
+
+}
+
+/* =========================================
+   RECENT TABLE TITLE
+========================================= */
+
+.table-container h2{
+
+    margin-bottom:18px;
+
+    font-size:24px;
+
+    font-weight:600;
+
+    color:#111827;
+
+}
+
+/* =========================================
+   DARK MODE CARD
+========================================= */
+
+.dark-mode .card{
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.35);
+
+}
+
+/* =========================================
+   DARK MODE CARD HOVER
+========================================= */
+
+.dark-mode .card:hover{
+
+    box-shadow:
+    0 20px 45px rgba(0,0,0,0.45);
+
+}
+
+/* =========================================
+   DARK MODE TABLE TITLE
+========================================= */
+
+.dark-mode .table-container h2{
+
+    color:white;
+
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:768px){
+
+    .card{
+
+        padding:22px;
+
+    }
+
+    .card h1,
+    .card h2{
+
+        font-size:30px;
+
+    }
+
+    .card h3,
+    .card p{
+
+        font-size:15px;
+
+    }
+
+    .table-container h2{
+
+        font-size:20px;
+
+    }
+
+}

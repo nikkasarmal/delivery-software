@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+    SGC ERP - Tracking System
+</title>
+
+<link
+    rel="stylesheet"
+    href="assets/css/style.css"
+>
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+
+    <div class="sidebar">
+
+        <h2>
+            SGC ERP
+        </h2>
+
+        <ul>
+
+            <li onclick="goToPage('dashboard.html')">
+                📊 Dashboard
+            </li>
+
+            <li onclick="goToPage('gr-entry.html')">
+                🚛 G.R Entry
+            </li>
+
+            <li onclick="goToPage('delivery-receipt.html')">
+                🧾 Delivery Receipt
+            </li>
+
+            <li
+                class="active-menu"
+                onclick="goToPage('tracking.html')"
+            >
+                📍 Tracking
+            </li>
+
+            <li onclick="goToPage('cash-book.html')">
+                💰 Daily Cash Book
+            </li>
+
+            <li onclick="goToPage('transport-master.html')">
+                🚚 Transport Master
+            </li>
+
+            <li onclick="goToPage('challan-report.html')">
+                📄 Challan Reports
+            </li>
+
+            <li onclick="goToPage('transport-ledger.html')">
+                📘 Transport Ledger
+            </li>
+
+            <li onclick="goToPage('reports.html')">
+                📈 Reports
+            </li>
+
+            <li onclick="goToPage('backup.html')">
+                💾 Backup
+            </li>
+
+        </ul>
+
+        <!-- USER -->
+
+        <div class="sidebar-footer">
+
+            <p id="loggedUser">
+
+                User : -
+
+            </p>
+
+            <br>
+
+            <button
+                type="button"
+                class="delete-btn"
+                onclick="logout()"
+                style="width:100%;"
+            >
+                Logout
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- =====================================
+         MAIN
+    ====================================== -->
+
+    <div class="main">
+
+        <!-- =====================================
+             TOPBAR
+        ====================================== -->
+
+        <div class="topbar">
+
+            <div>
+
+                <h1>
+                    Tracking System
+                </h1>
+
+                <p id="currentFY">
+
+                    Financial Year :
+                    2025-26
+
+                </p>
+
+            </div>
+
+            <div class="action-buttons">
+
+                <button
+                    type="button"
+                    class="dark-btn"
+                    onclick="toggleDarkMode()"
+                >
+                    🌙 Dark Mode
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- =====================================
+             TRACKING STATS
+        ====================================== -->
+
+        <div class="cards">
+
+            <div class="card total-card">
+
+                <h3>
+                    Total Tracking
+                </h3>
+
+                <h1 id="trackingTotal">
+
+                    Live
+
+                </h1>
+
+            </div>
+
+            <div class="card pending-card">
+
+                <h3>
+                    Godown Stock
+                </h3>
+
+                <h1>
+
+                    Active
+
+                </h1>
+
+            </div>
+
+            <div class="card collection-card">
+
+                <h3>
+                    Live Delivery
+                </h3>
+
+                <h1>
+
+                    Running
+
+                </h1>
+
+            </div>
+
+            <div class="card delivered-card">
+
+                <h3>
+                    Delivery Status
+                </h3>
+
+                <h1>
+
+                    Updated
+
+                </h1>
+
+            </div>
+
+        </div>
+
+        <!-- =====================================
+             CONTROLS
+        ====================================== -->
+
+        <div class="form-box">
+
+            <div class="tracking-controls">
+
+                <!-- SEARCH -->
+
+                <input
+                    type="text"
+                    id="trackingSearch"
+                    placeholder="Search GR / Truck / Party / Receipt..."
+                    onkeyup="searchTracking()"
+                >
+
+                <!-- FILTER -->
+
+                <select
+                    id="statusFilter"
+                    onchange="filterStatus()"
+                >
+
+                    <option value="All">
+                        All Status
+                    </option>
+
+                    <option value="In Godown">
+                        In Godown
+                    </option>
+
+                    <option value="Out For Delivery">
+                        Out For Delivery
+                    </option>
+
+                    <option value="Delivered">
+                        Delivered
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+        <!-- =====================================
+             TRACKING TABLE
+        ====================================== -->
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>GR No</th>
+
+                        <th>Truck</th>
+
+                        <th>Sender</th>
+
+                        <th>Receiver</th>
+
+                        <th>From</th>
+
+                        <th>To</th>
+
+                        <th>Pvt Marka</th>
+
+                        <th>Material</th>
+
+                        <th>Payment Type</th>
+
+                        <th>Receipt</th>
+
+                        <th>Received By</th>
+
+                        <th>Vehicle</th>
+
+                        <th>Status</th>
+
+                        <th>Payment Mode</th>
+
+                        <th>Received</th>
+
+                        <th>Balance</th>
+
+                        <th>Payment Status</th>
+
+                        <th>Date</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="trackingTable">
+
+                    <tr>
+
+                        <td colspan="18">
+
+                            No Tracking Data Found
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =====================================
+     SCRIPTS
+===================================== -->
+
+<script src="database/indexeddb.js"></script>
+
+<script src="assets/js/app.js"></script>
+
+<script src="assets/js/tracking.js"></script>
+
+<script src="assets/js/auth.js"></script>
+
+</body>
+
+</html>

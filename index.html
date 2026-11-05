@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+    SGC ERP Login
+</title>
+
+<link
+    rel="stylesheet"
+    href="assets/css/style.css"
+>
+
+<link rel="stylesheet" href="assets/css/index.css">
+
+<link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+>
+
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+>
+
+</head>
+
+<body class="login-page">
+
+<!-- BACKGROUND -->
+
+<div class="login-background"></div>
+
+<!-- LOGIN -->
+
+<div class="login-wrapper">
+
+    <div class="login-box">
+
+        <!-- BRAND -->
+
+        <div class="brand-section">
+
+            <div class="login-logo">
+
+                🚛
+
+            </div>
+
+            <h1>
+                SHIVAM GOLDEN
+                CARRIERS REGD.
+            </h1>
+
+            <p>
+                TSL Delivery & ERP
+                Management System
+            </p>
+
+        </div>
+
+        <!-- LOGIN FORM -->
+
+        <div class="login-form">
+
+            <!-- USERNAME -->
+
+            <div class="input-group">
+
+                <label>
+                    Employee ID
+                </label>
+
+                <div class="input-box">
+
+                    <span class="input-icon">
+                        👤
+                    </span>
+
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Enter Employee ID"
+                        autocomplete="off"
+                        autofocus
+                    >
+
+                </div>
+
+            </div>
+
+            <!-- PASSWORD -->
+
+            <div class="input-group">
+
+                <label>
+                    Password
+                </label>
+
+                <div class="input-box password-box">
+
+                    <span class="input-icon">
+                        🔒
+                    </span>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter Password"
+                    >
+
+                    <button
+                        type="button"
+                        class="toggle-password"
+                        onclick="togglePassword()"
+                    >
+                        👁
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- FINANCIAL YEAR -->
+
+            <div class="input-group">
+
+                <label>
+                    Financial Year
+                </label>
+
+                <div class="input-box">
+
+                    <span class="input-icon">
+                        📅
+                    </span>
+
+                    <select id="financialYear">
+
+                        <option
+                            disabled
+                            selected
+                            value=""
+                        >
+                            Select Financial Year
+                        </option>
+
+                        <option value="2026-27">
+                            2026-27
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <!-- LOGIN BUTTON -->
+
+            <button
+                type="button"
+                class="login-btn"
+                id="loginBtn"
+                onclick="login()"
+            >
+
+                <span>
+                    Login To ERP
+                </span>
+
+            </button>
+
+        </div>
+
+        <!-- FOOTER -->
+
+        <div class="login-footer">
+
+            <div class="version-badge">
+
+                VERSION 1.1.1
+
+            </div>
+
+            <p>
+
+                © 2026 Shivam Golden
+                Carriers Regd.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- SCRIPTS -->
+
+<script src="assets/js/auth.js"></script>
+
+<script>
+
+/* =========================================
+   TOGGLE PASSWORD
+========================================= */
+
+function togglePassword(){
+
+    const password =
+    document.getElementById(
+        "password"
+    );
+
+    const button =
+    document.querySelector(
+        ".toggle-password"
+    );
+
+    if(
+        password.type ===
+        "password"
+    ){
+
+        password.type =
+        "text";
+
+        button.innerText =
+        "🙈";
+
+    }
+
+    else{
+
+        password.type =
+        "password";
+
+        button.innerText =
+        "👁";
+
+    }
+
+}
+
+/* =========================================
+   ENTER KEY LOGIN
+========================================= */
+
+document.addEventListener(
+    "keydown",
+    (event)=>{
+
+        if(event.key === "Enter"){
+
+            login();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>
